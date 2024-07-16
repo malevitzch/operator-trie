@@ -1,2 +1,3 @@
-include_directories(${operator-trie_SOURCE_DIR}/include)
-add_executable(operator-trie example_main.cpp) 
+add_executable(operator-trie example_main.cpp operator_trie.cpp)
+target_include_directories(operator-trie PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
