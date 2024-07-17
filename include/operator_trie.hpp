@@ -9,14 +9,15 @@ class Trie
 private:
   std::vector<char> alphabet;
   int get_index(char target);
-  friend class TrieNode;
-  class TrieNode
+  friend struct TrieNode;
+  struct TrieNode
   {
-  private:
     std::shared_ptr<int> ptrs[ALPHABET_SIZE];
-    bool finish;
     char symbol;
-  public:
+    bool finish;
+    TrieNode(char symbol, bool finish);
+    bool has_word();
+    bool possible_next(char symbol);
     friend class Trie;
   };
   std::shared_ptr<TrieNode> root;
