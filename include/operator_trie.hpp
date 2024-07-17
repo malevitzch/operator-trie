@@ -12,12 +12,12 @@ private:
   friend struct TrieNode;
   struct TrieNode
   {
-    std::shared_ptr<int> ptrs[ALPHABET_SIZE];
+    std::vector<std::shared_ptr<int>> ptrs;
     char symbol;
     bool finish;
-    TrieNode(char symbol, bool finish);
+    TrieNode(char symbol, bool finish, int alphabet_size);
     bool has_word();
-    bool possible_next(char symbol);
+    bool possible_next(int index);
     friend class Trie;
   };
   std::shared_ptr<TrieNode> root;

@@ -23,3 +23,8 @@ int Trie::get_index(char target)
   return -1;
 }
 
+Trie::TrieNode::TrieNode(char symbol, bool finish, int alphabet_size) : symbol(symbol), finish(finish), ptrs(alphabet_size, nullptr) {}
+bool Trie::TrieNode::possible_next(int index)
+{
+  return ptrs[index] != nullptr;
+}
