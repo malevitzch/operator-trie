@@ -1,6 +1,6 @@
 #include "operator_trie.hpp"
 #include <algorithm>
-#include <iostream>
+
 int Trie::get_index(char target)
 {
   int l = 0;
@@ -53,7 +53,6 @@ bool Trie::contains(string word)
   std::shared_ptr<TrieNode> cur = root;
   for(char ch : word)
   {
-    //std::cout<<ch;
     int index = get_index(ch);
     if(!cur->possible_next(index))
     {
