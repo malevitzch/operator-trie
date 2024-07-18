@@ -1,10 +1,11 @@
 #include "operator_trie.hpp"
 #include <algorithm>
+#include <iostream>
 int Trie::get_index(char target)
 {
   int l = 0;
   int r = alphabet.size() - 1;
-  while(l < r)
+  while(l <= r)
   {
     int mid = (l + r) / 2;
     if(alphabet[mid] < target)
@@ -35,11 +36,12 @@ Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shar
 void Trie::insert(string word)
 {
   std::shared_ptr<TrieNode> cur = root;
+
   for(char ch : word)
   {
     int index = get_index(ch);
     if(!cur->possible_next(index))
-    {
+    { 
       cur->ptrs[index] = std::make_shared<TrieNode>(ch, false, alphabet.size());
     }
     cur = cur->ptrs[index];
@@ -51,8 +53,9 @@ bool Trie::contains(string word)
   std::shared_ptr<TrieNode> cur = root;
   for(char ch : word)
   {
+    //std::cout<<ch;
     int index = get_index(ch);
-    if(!cur->possible_next(ch))
+    if(!cur->possible_next(index))
     {
       return false;
     }
