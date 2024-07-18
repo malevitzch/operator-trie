@@ -2,8 +2,6 @@
 #include <vector>
 #include <memory>
 using std::string;
-#define ALPHABET_SIZE 26
-
 class Trie
 { 
 private:
@@ -16,7 +14,6 @@ private:
     char symbol;
     bool finish;
     TrieNode(char symbol, bool finish, int alphabet_size);
-    bool has_word();
     bool possible_next(int index);
     friend class Trie;
   };
@@ -24,6 +21,7 @@ private:
 public:
   Trie(std::vector<char> alphabet);
   std::vector<string> split_string(string str);
-  void add_operator(string op);
+  void insert(string op);
   bool contains(string op);
 };
+//TODO: if we want to support deletion, we need TrieNode to keep usecount and delete nodes by calling shared_ptr<TrieNode>.reset()
