@@ -10,7 +10,7 @@ private:
   friend struct TrieNode;
   struct TrieNode
   {
-    std::vector<std::shared_ptr<int>> ptrs;
+    std::vector<std::shared_ptr<TrieNode>> ptrs;
     char symbol;
     bool finish;
     TrieNode(char symbol, bool finish, int alphabet_size);
@@ -21,7 +21,7 @@ private:
 public:
   Trie(std::vector<char> alphabet);
   std::vector<string> split_string(string str);
-  void insert(string op);
-  bool contains(string op);
+  void insert(string word);
+  bool contains(string word);
 };
 //TODO: if we want to support deletion, we need TrieNode to keep usecount and delete nodes by calling shared_ptr<TrieNode>.reset()

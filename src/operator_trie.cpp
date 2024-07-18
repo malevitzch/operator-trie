@@ -32,3 +32,31 @@ Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shar
 {
   std::sort(alphabet.begin(), alphabet.end());
 }
+void Trie::insert(string word)
+{
+  std::shared_ptr<TrieNode> cur = root;
+  for(char ch : word)
+  {
+    int index = get_index(ch);
+    if(!cur->possible_next(index))
+    {
+      cur->ptrs[index] = std::make_shared<TrieNode>(ch, false, alphabet.size());
+    }
+    cur = cur->ptrs[index];
+  }
+  cur->finish = true;
+}
+bool Trie::contains(string word)
+{
+  std::shared_ptr<TrieNode> cur = root;
+  for(char ch : word)
+  {
+    int index = get_index(ch);
+    if(!cur->possible_next(ch))
+    {
+      return false;
+    }
+    cur = cur->ptrs[index];
+  }
+  return cur->finish;
+}
