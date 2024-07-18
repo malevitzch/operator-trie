@@ -1,5 +1,5 @@
 #include "operator_trie.hpp"
-
+#include <algorithm>
 int Trie::get_index(char target)
 {
   int l = 0;
@@ -27,4 +27,8 @@ Trie::TrieNode::TrieNode(char symbol, bool finish, int alphabet_size) : symbol(s
 bool Trie::TrieNode::possible_next(int index)
 {
   return ptrs[index] != nullptr;
+}
+Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shared<TrieNode>('\0', false, alphabet.size()))
+{
+  std::sort(alphabet.begin(), alphabet.end());
 }
