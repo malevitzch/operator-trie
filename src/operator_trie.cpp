@@ -33,6 +33,37 @@ Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shar
 {
   std::sort(alphabet.begin(), alphabet.end());
 }
+std::optional<std::vector<string>> Trie::split_string(string str)
+{
+  std::vector<string> result;
+  string buf = "";
+  auto unload = [&buf, &result]()
+  {
+    if(buf.size() > 0)
+    {
+        result.push_back(buf);
+        buf = "";
+    }
+  };
+  std::shared_ptr<TrieNode> cur = root;
+  for(char ch : str)
+  {
+    int index = get_index(ch);
+    if(index == -1) return std::nullopt;
+    if(!cur->possible_next(index))
+    {
+      unload();
+      cur = root;
+      if(!cur->possible_next(index))
+      {
+        return std::nullopt;
+      }
+    }
+    cur = cur->ptrs[index];
+  }
+  unload();
+  return std::optional<std::vector<string>>(result);
+}
 void Trie::insert(string word)
 {
   std::shared_ptr<TrieNode> cur = root;

@@ -1,3 +1,4 @@
+#include <optional>
 #include <string>
 #include <vector>
 #include <memory>
@@ -20,7 +21,7 @@ private:
   std::shared_ptr<TrieNode> root;
 public:
   Trie(std::vector<char> alphabet);
-  std::vector<string> split_string(string str);
+  std::optional<std::vector<string>> split_string(string str);
   void insert(string word);
   bool contains(string word);
 };
