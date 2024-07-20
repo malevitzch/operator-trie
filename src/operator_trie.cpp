@@ -63,7 +63,7 @@ Trie::Trie(std::vector<string> words)
     insert(word);
   }
 }
-std::optional<std::vector<string>> Trie::split_string(string str)
+std::vector<string> Trie::split_string(string str)
 {
   std::vector<string> result;
   string buf = "";
@@ -79,20 +79,21 @@ std::optional<std::vector<string>> Trie::split_string(string str)
   for(char ch : str)
   {
     int index = get_index(ch);
-    if(index == -1) return std::nullopt;
+    if(index == -1) return {};
     if(!cur->possible_next(index))
     {
       unload();
       cur = root;
       if(!cur->possible_next(index))
       {
-        return std::nullopt;
+        return {};
       }
     }
     cur = cur->ptrs[index];
+    buf += ch;
   }
   unload();
-  return std::optional<std::vector<string>>(result);
+  return result; 
 }
 void Trie::insert(string word)
 {
