@@ -58,6 +58,10 @@ Trie::Trie(std::vector<string> words)
     alphabet.push_back(ch);
   }
   root = std::make_shared<TrieNode>('\0', false, alphabet.size());
+  for(string& word : words)
+  {
+    insert(word);
+  }
 }
 std::optional<std::vector<string>> Trie::split_string(string str)
 {
