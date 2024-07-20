@@ -33,6 +33,14 @@ Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shar
 {
   std::sort(alphabet.begin(), alphabet.end());
 }
+Trie::Trie(std::vector<char> alphabet, std::vector<string> words)
+{
+  std::sort(alphabet.begin(), alphabet.end());
+  for(string& word : words)
+  {
+    insert(word);
+  }
+}
 std::optional<std::vector<string>> Trie::split_string(string str)
 {
   std::vector<string> result;
