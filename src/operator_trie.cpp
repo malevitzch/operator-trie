@@ -1,5 +1,6 @@
 #include "operator_trie.hpp"
 #include <algorithm>
+#include <set>
 
 int Trie::get_index(char target)
 {
@@ -33,13 +34,30 @@ Trie::Trie(std::vector<char> alphabet) : alphabet(alphabet), root(std::make_shar
 {
   std::sort(alphabet.begin(), alphabet.end());
 }
-Trie::Trie(std::vector<char> alphabet, std::vector<string> words)
+Trie::Trie(std::vector<char> alphabet, std::vector<string> words) : alphabet(alphabet), root(std::make_shared<TrieNode>('\0', false, alphabet.size()))
 {
   std::sort(alphabet.begin(), alphabet.end());
   for(string& word : words)
   {
     insert(word);
   }
+}
+Trie::Trie(std::vector<string> words) 
+{
+  std::set<char> chars;
+  for(string& word : words)
+  {
+    for(char ch : word)
+    {
+      chars.insert(ch);
+    }
+  }
+  alphabet.clear();
+  for(char ch : chars)
+  {
+    alphabet.push_back(ch);
+  }
+  root = std::make_shared<TrieNode>('\0', false, alphabet.size());
 }
 std::optional<std::vector<string>> Trie::split_string(string str)
 {

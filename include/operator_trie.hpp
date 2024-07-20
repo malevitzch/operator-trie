@@ -22,6 +22,7 @@ private:
 public:
   Trie(std::vector<char> alphabet);
   Trie(std::vector<char> alphabet, std::vector<string> words);
+  Trie(std::vector<string> words);
   std::optional<std::vector<string>> split_string(string str);
   void insert(string word);
   bool contains(string word);
